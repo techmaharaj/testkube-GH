@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test_worflow:
+    name: test workflow for local minikube.
+    runs-on: self-hosted
+    steps:
+      - name: Load the IP
+        run: |
+          echo "THE_IP=$(cat ip.txt)" >> $GITHUB_ENV
+      - name: Run test
+        uses: kubeshop/testkube-run-action@v1
+        with:
+        # Instance
+          organization: ${{ secrets.TkOrganization }}
+          environment: ${{ secrets.TkEnvironment }}
+          token: ${{ secrets.TkToken }}
+          url: https://api.testkube.dev/
+          test: curl-url-test
