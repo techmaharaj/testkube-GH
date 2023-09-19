@@ -1,3 +1,5 @@
+name: Running Testkube Tests.
+
 on:
   push:
     branches:
