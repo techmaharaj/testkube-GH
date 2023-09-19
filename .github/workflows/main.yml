@@ -4,7 +4,7 @@ on:
       - main
 jobs:
   test_worflow:
-    name: test workflow for local minikube.
+    name: test workflow for local Minikube.
     runs-on: self-hosted
     steps:
       - name: Load the IP
