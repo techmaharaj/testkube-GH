@@ -30,4 +30,4 @@ jobs:
           url: https://api.testkube.dev/
           test: curl-url-test
           variables: |
-            IP="${{ steps.test_workflow.outputs.IP_ADDRESS }}"
+            IP="${{ env.IP_ADDRESS }}"
