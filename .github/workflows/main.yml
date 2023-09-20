@@ -15,7 +15,6 @@ jobs:
           # Read the first line of ip.txt into a variable
           IP_ADDRESS=$(head -n 1 ip.txt)
           echo "Extracted IP Address: $IP_ADDRESS"
-
         env:
           IP_ADDRESS: ${{ steps.extract-ip.outputs.IP_ADDRESS }}
 
@@ -28,3 +27,5 @@ jobs:
           token: ${{ secrets.TkToken }}
           url: https://api.testkube.dev/
           test: curl-url-test
+          variables: |
+            IP: "${{env.IP_ADDRESS}}"
