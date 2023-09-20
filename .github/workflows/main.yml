@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Load the IP
         run: |
-          echo "THE_IP=$(cat ip.txt)" >> $GITHUB_ENV
+          echo "THE_IP=$(cat /ip.txt)" >> $GITHUB_ENV
       - name: Run test
         uses: kubeshop/testkube-run-action@v1
         with:
