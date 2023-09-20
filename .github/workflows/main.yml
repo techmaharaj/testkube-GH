@@ -8,9 +8,17 @@ jobs:
     name: test workflow for local minikube.
     runs-on: self-hosted
     steps:
-      - name: Load the IP
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Extract IP Address
         run: |
-          echo "THE_IP=$(cat /ip.txt)" >> $GITHUB_ENV
+          # Read the first line of ip.txt into a variable
+          IP_ADDRESS=$(head -n 1 ip.txt)
+          echo "Extracted IP Address: $IP_ADDRESS"
+
+        env:
+          IP_ADDRESS: ${{ steps.extract-ip.outputs.IP_ADDRESS }}
+
       - name: Run test
         uses: kubeshop/testkube-run-action@v1
         with:
