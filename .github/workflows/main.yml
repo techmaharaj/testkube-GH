@@ -11,6 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Extract IP Address
+        id: extract-ip-address
         run: |
           # Read the first line of ip.txt into a variable
           IP_ADDRESS=$(head -n 1 ip.txt)
