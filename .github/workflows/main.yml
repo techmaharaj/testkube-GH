@@ -16,7 +16,7 @@ jobs:
           IP_ADDRESS=$(head -n 1 ip.txt)
           echo "Extracted IP Address: $IP_ADDRESS"
         env:
-          IP_ADDRESS: ${{ steps.extract-ip.outputs.IP_ADDRESS }}
+          IP_ADDRESS: ${{ steps.test_workflow.outputs.IP_ADDRESS }}
 
       - name: Run test
         uses: kubeshop/testkube-run-action@v1
