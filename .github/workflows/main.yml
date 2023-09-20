@@ -14,9 +14,9 @@ jobs:
         id: extract-ip-address
         run: |
           # Read the first line of ip.txt into a variable
-          EXPECTED_IP_ADDRESS=$(head -n 1 ip.txt)
-          echo "Extracted IP Address: $EXPECTED_IP_ADDRESS"
-          echo "IP_ADDRESS=$EXPECTED_IP_ADDRESS" >> $GITHUB_ENV
+          IP_ADDRESS=$(head -n 1 ip.txt)
+          echo "Extracted IP Address: $IP_ADDRESS"
+          echo "IP_ADDRESS=$IP_ADDRESS" >> $GITHUB_ENV
       - name: Print IP Address
         run: echo "The extracted IP address is $IP_ADDRESS"
 
@@ -30,4 +30,4 @@ jobs:
           url: https://api.testkube.dev/
           test: 66
           variables: |
-            IP="${{ env.EXPECTED_IP_ADDRESS }}"
+            EXPECTED_IP_ADDRESS="${{ env.IP_ADDRESS }}"
