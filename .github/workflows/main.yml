@@ -15,8 +15,10 @@ jobs:
           # Read the first line of ip.txt into a variable
           IP_ADDRESS=$(head -n 1 ip.txt)
           echo "Extracted IP Address: $IP_ADDRESS"
-        env:
-          IP_ADDRESS: ${{ steps.test_workflow.outputs.IP_ADDRESS }}
+      - name: Set IP Address as an Output
+        run: echo "IP_ADDRESS=${{ steps.extract-ip-address.outputs.IP_ADDRESS }}" >> $GITHUB_ENV
+      - name: Print IP Address
+        run: echo "The extracted IP address from ENV is ${{ env.IP_ADDRESS }}"
 
       - name: Run test
         uses: kubeshop/testkube-run-action@v1
