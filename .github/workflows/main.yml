@@ -28,7 +28,7 @@ jobs:
          name: kubeconfig
          path: /home/runner/.kube/config
    job_2:
-     name: create test using testkube
+     name: create a test using testkube
      needs: job_1
      runs-on: ubuntu-latest 
      steps:
