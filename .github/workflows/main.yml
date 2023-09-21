@@ -22,4 +22,33 @@ jobs:
      - name: kubeconfig
        run: |
          aws eks update-kubeconfig --name ${{ env.CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
-       
+     - name: Upload kubeconfig file
+       uses: actions/upload-artifact@v3
+       with:
+         name: kubeconfig
+         path: /home/runner/.kube/config
+   job_2:
+     name: create test using testkube
+     needs: job_1
+     runs-on: ubuntu-latest 
+     steps:
+     - name: Download kubeconfig from job 1
+       uses: actions/download-artifact@v3
+       with:
+        name: kubeconfig
+     - shell: bash
+       run: |
+         export KUBECONFIG=/home/runner/work/testkube-test/testkube-test/config
+     - name: Create test
+       id: create_test
+       uses: kubeshop/testkube-docker-action@v1.3
+       env:
+         KUBECONFIG: /home/runner/work/testkube-test/testkube-test/config
+         KUBERNETES_MASTER: /home/runner/work/testkube-test/testkube-test/config
+       with:
+         command: create
+         resource: test
+         namespace: testkube
+         parameters: "--git-uri https://github.com/infracloudio/testkube-django-app.git --git-path myproject/examples/ --type ginkgo/test --name testkube-github-action --git-branch master"
+  
+         
