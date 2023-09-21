@@ -39,6 +39,8 @@ jobs:
      - shell: bash
        run: |
          export KUBECONFIG=/home/runner/work/testkube-GH/testkube-GH/config
+         cd /home/runner/work/testkube-GH/testkube-GH/
+         ls
      - name: Create test
        id: create_test
        uses: kubeshop/testkube-docker-action@v1.3
