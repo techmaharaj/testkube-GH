@@ -39,6 +39,7 @@ jobs:
      - shell: bash
        run: |
          export KUBECONFIG=/home/runner/work/testkube-GH/testkube-GH/config
+         kubectl get pods -A
          cd /home/runner/work/testkube-GH/testkube-GH/
          cat config
      - name: Create test
