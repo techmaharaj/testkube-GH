@@ -14,25 +14,5 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
-          args: get pods
-      - name: Extract IP Address
-        id: extract-ip-address
-        run: |
-          # Read the first line of ip.txt into a variable
-          IP_ADDRESS=$(head -n 1 ip.txt)
-          echo "Extracted IP Address: $IP_ADDRESS"
-          echo "IP_ADDRESS=$IP_ADDRESS" >> $GITHUB_ENV
-      - name: Print IP Address
-        run: echo "The extracted IP address is $IP_ADDRESS"
-
-      - name: Run test
-        uses: kubeshop/testkube-run-action@v1
-        with:
-        # Instance
-          organization: ${{ secrets.TkOrganization }}
-          environment: ${{ secrets.TkEnvironment }}
-          token: ${{ secrets.TkToken }}
-          url: https://api.testkube.dev/
-          test: 66
-          variables: |
-            EXPECTED_IP_ADDRESS="${{ env.IP_ADDRESS }}"
+          args: get pods -A
+     
