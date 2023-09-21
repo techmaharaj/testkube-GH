@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+env:
+  CLUSTER_NAME: ferocious-badger-1695294076
+  
 jobs:
    job_1:
      name: test workflow for AWS
