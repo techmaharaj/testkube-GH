@@ -38,13 +38,13 @@ jobs:
         name: kubeconfig
      - shell: bash
        run: |
-         export KUBECONFIG=/home/runner/work/testkube-test/testkube-test/config
+         export KUBECONFIG=/home/runner/work/testkube-GH/testkube-GH/config
      - name: Create test
        id: create_test
        uses: kubeshop/testkube-docker-action@v1.3
        env:
-         KUBECONFIG: /home/runner/work/testkube-test/testkube-test/config
-         KUBERNETES_MASTER: /home/runner/work/testkube-test/testkube-test/config
+         KUBECONFIG: /home/runner/work/testkube-GH/testkube-GH/config
+         KUBERNETES_MASTER: /home/runner/work/testkube-GH/testkube-GH/config
        with:
          command: create
          resource: test
