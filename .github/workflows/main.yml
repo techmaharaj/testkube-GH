@@ -40,7 +40,7 @@ jobs:
        run: |
          export KUBECONFIG=/home/runner/work/testkube-GH/testkube-GH/config
          cd /home/runner/work/testkube-GH/testkube-GH/
-         ls
+         cat config
      - name: Create test
        id: create_test
        uses: kubeshop/testkube-docker-action@v1.3
