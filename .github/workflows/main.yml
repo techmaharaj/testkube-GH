@@ -36,6 +36,7 @@ jobs:
        uses: actions/download-artifact@v3
        with:
         name: kubeconfig
+        path: /home/runner/work/testkube-GH/testkube-GH/config
      - shell: bash
        run: |
          export KUBECONFIG=/home/runner/work/testkube-GH/testkube-GH/config
