@@ -26,7 +26,11 @@ jobs:
        run: |
          kubectl get pods -A # I guess it's just for debugging purposes, as it shouldn't be needed
      - name: Create test
+       id: create_test
        uses: kubeshop/testkube-docker-action@v1.3
+       env:
+         KUBECONFIG: /home/runner/.kube/config
+         KUBERNETES_MASTER: /home/runner/.kube/config
        with:
          command: create
          resource: test
