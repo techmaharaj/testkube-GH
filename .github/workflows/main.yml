@@ -39,8 +39,8 @@ jobs:
         path: /home/runner/.kube/config
      - shell: bash
        run: |
-         export KUBECONFIG=/home/runner/work/testkube-GH/testkube-GH/config/kubeconfig
-         cd /home/runner/work/testkube-GH/testkube-GH/config/kubeconfig
+         export KUBECONFIG=/home/runner/.kube/config
+         cd /home/runner/.kube/config
          ls
      - name: Create test
        id: create_test
