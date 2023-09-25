@@ -41,8 +41,8 @@ jobs:
        run: |
          export KUBECONFIG=/home/runner/work/testkube-GH/testkube-GH/config
          kubectl get pods -A
-         cd /home/runner/work/testkube-GH/testkube-GH/
-         cat config
+         cd /home/runner/work/testkube-GH/testkube-GH/config
+         ls
      - name: Create test
        id: create_test
        uses: kubeshop/testkube-docker-action@v1.3
