@@ -36,13 +36,13 @@ jobs:
        uses: actions/download-artifact@v3
        with:
         name: kubeconfig
-        path: /home/runner/work/testkube-GH/testkube-GH/config/kubeconfig
+        path: /home/runner/work/testkube-GH/testkube-GH/config
      - shell: bash
        run: |
          export KUBECONFIG=/home/runner/work/testkube-GH/testkube-GH/config/kubeconfig
          kubectl get pods -A
-         cd /home/runner/work/testkube-GH/testkube-GH/
-         cat config
+         cd /home/runner/work/testkube-GH/testkube-GH/config/
+         cat kubeconfig
      - name: Create test
        id: create_test
        uses: kubeshop/testkube-docker-action@v1.3
