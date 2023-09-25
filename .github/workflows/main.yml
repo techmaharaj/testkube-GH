@@ -46,8 +46,8 @@ jobs:
        id: create_test
        uses: kubeshop/testkube-docker-action@v1.3
        env:
-         KUBECONFIG: /home/runner/work/testkube-GH/testkube-GH/config/kubeconfig
-         KUBERNETES_MASTER: /home/runner/work/testkube-GH/testkube-GH/config
+         KUBECONFIG: /home/runner/.kube/config
+         KUBERNETES_MASTER: /home/runner/.kube/config
        with:
          command: create
          resource: test
