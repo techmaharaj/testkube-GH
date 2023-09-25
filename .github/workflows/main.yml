@@ -22,6 +22,9 @@ jobs:
      - name: kubeconfig
        run: |
          aws eks update-kubeconfig --name ${{ env.CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+     - shell: bash
+       run: |
+         kubectl get pods -A # I guess it's just for debugging purposes, as it shouldn't be needed
      - name: Upload kubeconfig file
        uses: actions/upload-artifact@v3
        with:
