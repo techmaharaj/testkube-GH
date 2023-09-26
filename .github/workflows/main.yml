@@ -24,13 +24,16 @@ jobs:
        run: |
          kubectl get pods -A # I guess it's just for debugging purposes, as it shouldn't be needed
      - name: Create test
-       id: create_test
        uses: kubeshop/testkube-docker-action@v1
        env:
-         KUBECONFIG: /home/runner/.kube/config
-         KUBERNETES_MASTER: /home/runner/.kube/config
+         KUBECONFIG: ~/.kube/config
        with:
          command: create
          resource: test
          namespace: testkube
          parameters: "--git-uri https://github.com/infracloudio/testkube-django-app.git --git-path myproject/examples/ --type ginkgo/test --name testkube-github-action --git-branch master"
+
+
+
+
+
