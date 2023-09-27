@@ -5,6 +5,7 @@ on:
       - main
 env:
   CLUSTER_NAME: ferocious-badger-1695294076
+  AWS_REGION: us-west-2
   
 jobs:
    job_1:
@@ -20,13 +21,12 @@ jobs:
      - name: kubeconfig
        run: |
          aws eks update-kubeconfig --name ${{ env.CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
-     - shell: bash
-       run: |
-         kubectl get pods -A # I guess it's just for debugging purposes, as it shouldn't be needed
+     - name: Copy k8s config file
+       run: cp /home/runner/.kube/config ${{ github.workspace }}
      - name: Create test
        uses: kubeshop/testkube-docker-action@v1
        env:
-         KUBECONFIG: ~/.kube/config
+         KUBECONFIG: ${{ github.workspace }}/config
        with:
          command: create
          resource: test
