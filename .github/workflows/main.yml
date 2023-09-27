@@ -42,17 +42,5 @@ jobs:
          resource: test
          namespace: testkube
          parameters: "k6-amazon-test -f"
-     - name: Sleep for 60 seconds
-       run: sleep 60s
-       shell: bash
-     - name: Get Test Results
-       id: get_test_results
-       uses: kubeshop/testkube-docker-action@v1
-       env:
-         KUBECONFIG: ${{ github.workspace }}/config
-       with:
-         command: get
-         resource: execution
-         namespace: testkube
-         parameters: k6-amazon-test-1
+  
 
