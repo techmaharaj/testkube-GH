@@ -32,3 +32,10 @@ jobs:
          resource: test
          namespace: testkube
          parameters: "--git-uri https://github.com/infracloudio/testkube-django-app.git --git-path myproject/examples/ --type ginkgo/test --name testkube-github-action --git-branch master"
+     - name: Run test
+       id: run_test
+       uses: kubeshop/testkube-docker-action@v1
+       with:
+         command: run
+         resource: test
+         parameters: testkube-github-action
