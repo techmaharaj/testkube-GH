@@ -41,7 +41,7 @@ jobs:
          command: run
          resource: test
          namespace: testkube
-         parameters: k6-amazon-test -f
+         parameters: "k6-amazon-test -f"
      - name: Sleep for 60 seconds
        run: sleep 60s
        shell: bash
