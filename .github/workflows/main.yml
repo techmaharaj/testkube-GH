@@ -23,7 +23,7 @@ jobs:
          aws eks update-kubeconfig --name ${{ env.CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
      - name: Copy k8s config file
        run: cp /home/runner/.kube/config ${{ github.workspace }}
-     - name: Create test
+     - name: Create K6 Test To Test Amazon.com
        uses: kubeshop/testkube-docker-action@v1
        env:
          KUBECONFIG: ${{ github.workspace }}/config
@@ -31,7 +31,7 @@ jobs:
          command: create
          resource: test
          namespace: testkube
-         parameters: "--git-uri https://github.com/infracloudio/testkube-django-app.git --git-path myproject/examples/ --type ginkgo/test --name testkube-github-action --git-branch master"
+         parameters: "--name k6-amazon-test --type k6/script --test-content-type git-file --git-uri https://github.com/techmaharaj/testkube-GH.git --git-branch main --git-path k6/amazon.js"
      - name: Run test
        id: run_test
        uses: kubeshop/testkube-docker-action@v1
@@ -41,7 +41,7 @@ jobs:
          command: run
          resource: test
          namespace: testkube
-         parameters: testkube-github-action
+         parameters: k6-amazon-test
      - name: Sleep for 10 seconds
        run: sleep 10s
        shell: bash
@@ -54,5 +54,5 @@ jobs:
          command: get
          resource: execution
          namespace: testkube
-         parameters: testkube-github-action
+         parameters: k6-amazon-test-1
 
