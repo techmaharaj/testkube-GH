@@ -35,7 +35,10 @@ jobs:
      - name: Run test
        id: run_test
        uses: kubeshop/testkube-docker-action@v1
+       env:
+         KUBECONFIG: ${{ github.workspace }}/config
        with:
          command: run
          resource: test
+         namespace: testkube
          parameters: testkube-github-action
