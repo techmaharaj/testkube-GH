@@ -42,8 +42,8 @@ jobs:
          resource: test
          namespace: testkube
          parameters: k6-amazon-test
-     - name: Sleep for 10 seconds
-       run: sleep 10s
+     - name: Sleep for 60 seconds
+       run: sleep 60s
        shell: bash
      - name: Get Test Results
        id: get_test_results
