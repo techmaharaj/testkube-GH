@@ -42,3 +42,14 @@ jobs:
          resource: test
          namespace: testkube
          parameters: testkube-github-action
+     - name: Get Test Results
+       id: get_test_results
+       uses: kubeshop/testkube-docker-action@v1
+       env:
+         KUBECONFIG: ${{ github.workspace }}/config
+       with:
+         command: watch
+         resource: execution
+         namespace: testkube
+         parameters: testkube-github-action
+
