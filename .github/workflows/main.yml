@@ -31,7 +31,7 @@ jobs:
          command: create
          resource: test
          namespace: testkube
-         parameters: "--name k6-amazon-test --type k6/script --test-content-type git-file --git-uri https://github.com/techmaharaj/testkube-GH.git --git-branch main --git-path k6/amazon.js -f"
+         parameters: "--name k6-amazon-test --type k6/script --test-content-type git-file --git-uri https://github.com/techmaharaj/testkube-GH.git --git-branch main --git-path k6/amazon.js"
      - name: Run test
        id: run_test
        uses: kubeshop/testkube-docker-action@v1
@@ -41,7 +41,7 @@ jobs:
          command: run
          resource: test
          namespace: testkube
-         parameters: k6-amazon-test
+         parameters: k6-amazon-test -f
      - name: Sleep for 60 seconds
        run: sleep 60s
        shell: bash
