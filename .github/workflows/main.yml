@@ -42,13 +42,16 @@ jobs:
          resource: test
          namespace: testkube
          parameters: testkube-github-action
+     - name: Sleep for 10 seconds
+       run: sleep 10s
+       shell: bash
      - name: Get Test Results
        id: get_test_results
        uses: kubeshop/testkube-docker-action@v1
        env:
          KUBECONFIG: ${{ github.workspace }}/config
        with:
-         command: watch
+         command: get
          resource: execution
          namespace: testkube
          parameters: testkube-github-action
