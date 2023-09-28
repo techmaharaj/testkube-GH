@@ -48,10 +48,19 @@ jobs:
        id: get_output
        run: |
          set +e
-         echo "status=testkube get execution k6-amazon-test-1" >> "$GITHUB_OUTPUT"
          exitcode="$?"
          echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
          exit "$exitcode"
+     - name: Check Exit Code and Act
+       id: check_and_act
+       run: |
+          if [[ "${{ steps.get_output.outputs.exitcode }}" == "0" ]]; then
+            echo "The previous step passed with exit code 0."
+          else
+            echo "The previous step failed with exit code ${{ steps.get_output.outputs.exitcode }}."
+            exit 1
+          fi
+
           
       
   
