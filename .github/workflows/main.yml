@@ -47,7 +47,11 @@ jobs:
      - name: Get Output
        id: get_output
        run: |
+         set +e
          echo "status=testkube get execution k6-amazon-test-1" >> "$GITHUB_OUTPUT"
+         exitcode="$?"
+         echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
+         exit "$exitcode"
           
       
   
