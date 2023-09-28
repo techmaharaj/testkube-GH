@@ -11,6 +11,8 @@ jobs:
    job_1:
      name: test workflow for AWS
      runs-on: ubuntu-latest
+     outputs:
+       outpu1: ${{ steps.get_output.outputs.status }}
      steps:
      - name: Configure AWS credentials
        uses: aws-actions/configure-aws-credentials@v4
@@ -42,5 +44,11 @@ jobs:
          resource: test
          namespace: testkube
          parameters: "k6-amazon-test -f"
+     - name: Get Output
+       id: get_output
+       run: |
+         echo "status=testkube get execution k6-amazon-test-1" >> "$GITHUB_OUTPUT"
+          
+      
   
 
