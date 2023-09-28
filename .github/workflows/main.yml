@@ -56,6 +56,7 @@ jobs:
        run: |
           if [[ "${{ steps.get_output.outputs.exitcode }}" == "0" ]]; then
             echo "The previous step passed with exit code 0."
+            exit 1
           else
             echo "The previous step failed with exit code ${{ steps.get_output.outputs.exitcode }}."
             exit 1
