@@ -33,6 +33,9 @@ export default function () {
   // Measure the time until the page loads completely
   const pageLoadTime = response.timings.duration;
 
+  console.log("==== Response Time")
+  console.log(pageLoadTime)
+
   // Check if the search results page request was successful
   check(response, {
     'Search results page is accessible': (r) => r.status === 200,
