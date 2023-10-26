@@ -4,7 +4,7 @@ on:
     branches:
       - main
 env:
-  CLUSTER_NAME: scrumptious-badger
+  CLUSTER_NAME: scrumptious-badger-1698309230
   AWS_REGION: us-west-2
   
 jobs:
