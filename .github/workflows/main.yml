@@ -1,8 +1,8 @@
 name: Running Testkube Tests.
 on:
-  pull_request:
-    types:
-      - opened
+  push:
+    branches:
+      - main
 env:
   CLUSTER_NAME: scrumptious-badger
   AWS_REGION: us-west-2
