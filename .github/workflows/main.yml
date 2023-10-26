@@ -31,21 +31,31 @@ jobs:
         testkube create test --name k6-amazon-test --type k6/script --test-content-type git-file --git-uri https://github.com/techmaharaj/testkube-GH.git --git-branch main --git-path k6/amazon.js
         testkube run test k6-amazon-test -f
         EXIT_CODE=$?
-        echo "exitcode=$EXIT_CODE"
-        if [[ EXIT_CODE == "0" ]]; then
-          echo "The previous step passed with exit code 0."
-          echo "Closing the PR since the exit code is 0."
-          curl -L \
-          -X PUT \
-          -H "Accept: application/vnd.github+json" \
-          -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
-          -H "X-GitHub-Api-Version: 2022-11-28" \
-          https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/merge \
-          -d '{"commit_title":"All Checks PAssed","commit_message":"PR auto-closed due to successful checks"}'
-        else
-           echo "The previous step failed with exit code ${{ steps.get_output.outputs.exitcode }}."
-           exit 1
-        fi
+        echo "Exitcode=$EXIT_CODE"
+     - name: Get Output
+       id: get_output
+       run: |
+         exitcode="$?"
+         echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
+         exit "$exitcode"
+     - name: Check Exit Code and Act
+       id: check_and_act
+       run: |
+          if [[ "${{ steps.get_output.outputs.exitcode }}" == "0" ]]; then
+            echo "The previous step passed with exit code 0."
+            echo "Closing the PR since the exit code is 0."
+            curl -L \
+            -X PUT \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/merge \
+            -d '{"commit_title":"All Checks PAssed","commit_message":"PR auto-closed due to successful checks"}'
+          else
+            echo "The previous step failed with exit code ${{ steps.get_output.outputs.exitcode }}."
+            exit 1
+          fi
+
 
           
       
