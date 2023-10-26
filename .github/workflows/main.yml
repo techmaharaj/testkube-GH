@@ -4,7 +4,7 @@ on:
     types:
       - opened
 env:
-  CLUSTER_NAME: ferocious-badger-1695294076
+  CLUSTER_NAME: scrumptious-badger
   AWS_REGION: us-west-2
   
 jobs:
@@ -23,10 +23,8 @@ jobs:
      - name: kubeconfig
        run: |
          aws eks update-kubeconfig --name ${{ env.CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
-     - name: Copy k8s config file
-       run: cp /home/runner/.kube/config ${{ github.workspace }}
      - name: Create K6 Test To Test Amazon.com
-       uses: kubeshop/testkube-docker-action@v1
+       uses: kubeshop/setup-testkube@v1
        env:
          KUBECONFIG: ${{ github.workspace }}/config
        with:
@@ -36,14 +34,8 @@ jobs:
          parameters: "--name k6-amazon-test --type k6/script --test-content-type git-file --git-uri https://github.com/techmaharaj/testkube-GH.git --git-branch main --git-path k6/amazon.js"
      - name: Run test
        id: run_test
-       uses: kubeshop/testkube-docker-action@v1
-       env:
-         KUBECONFIG: ${{ github.workspace }}/config
-       with:
-         command: run
-         resource: test
-         namespace: testkube
-         parameters: "k6-amazon-test -f"
+       run : |
+         testkube run test k6-amazon-test -f
      - name: Get Output
        id: get_output
        run: |
