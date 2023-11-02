@@ -41,6 +41,7 @@ jobs:
             -d '{"commit_title":"All Checks PAssed","commit_message":"PR auto-closed due to successful checks"}'
         else
           echo "The previous step failed with exit code 1."
+          exit 1
         fi
         
           
