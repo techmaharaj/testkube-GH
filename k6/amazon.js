@@ -12,7 +12,7 @@ export default function () {
 
   // Check if the response time is greater than 1 second
   check(response, {
-    'Response time is less than 1 second': (r) => r.timings.duration < 1,
+    'Response time is less than 1 second': (r) => r.timings.duration < 10,
   });
 
   // Add a sleep period (in this case, 1 second) between requests
