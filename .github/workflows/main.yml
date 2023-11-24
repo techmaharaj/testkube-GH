@@ -27,4 +27,9 @@ jobs:
         KUBECONFIG: ${{ github.workspace }}/config
     - run: |
         testkube create test --name k6-amazon-test --type k6/script --test-content-type git-file --git-uri https://github.com/techmaharaj/testkube-GH.git --git-branch main --git-path k6/amazon.js
-        testkube run test k6-amazon-test -f
+        if testkube run test k6-amazon-test -f; then
+          echo "The previous step passed with exit code 0."
+        else
+          echo "The previous step failed with exit code 1."
+          exit 1
+        fi
