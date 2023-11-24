@@ -2,7 +2,7 @@ name: Running tests with Testkube
 on:
   pull_request:
 env:
-  CLUSTER_NAME: extravagant-unicorn-1700799378
+  CLUSTER_NAME: scrumptious-hideout-1700805231
   AWS_REGION: us-west-2
  
 jobs:
