@@ -12,7 +12,7 @@ export default function () {
 
   // Check if the response time is greater than 1 second
   check(response, {
-    'Status is 200': (r) => r.status === 200, // Check if status code is 200
+    'Status is 200': (r) => r.status === 200,
   });
 
   // Add a sleep period (in this case, 1 second) between requests
