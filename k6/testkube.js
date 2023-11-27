@@ -9,7 +9,8 @@ export let options = {
 export default function () {
   // Send an HTTP GET request to the website
   let response = http.get('https://testkube.io'); // Replace with your website URL
-
+  console.log('Response:', response.body)
+  
   // Check if the response time is greater than 1 second
   check(response, {
     'Response time is less than 1 second': (r) => r.timings.duration < 5000,
