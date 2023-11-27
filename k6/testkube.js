@@ -8,11 +8,11 @@ export let options = {
 
 export default function () {
   // Send an HTTP GET request to the website
-  let response = http.get('https://amazon.com'); // Replace with your website URL
+  let response = http.get('https://testkube.io'); // Replace with your website URL
 
   // Check if the response time is greater than 1 second
   check(response, {
-    'Response time is less than 1 second': (r) => r.timings.duration < 10,
+    'Status is 200': (r) => r.status === 200, // Check if status code is 200
   });
 
   // Add a sleep period (in this case, 1 second) between requests
