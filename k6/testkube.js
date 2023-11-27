@@ -11,8 +11,9 @@ export default function () {
   let response = http.get('https://testkube.io'); // Replace with your website URL
 
   // Check if the response time is greater than 1 second
-  check(response, {
+ check(response, {
     'Status is 200': (r) => r.status === 200, // Check if status code is 200
+    'Response time is less than 1 second': (r) => r.timings.duration < 100, // Check if response time is less than 1 second (1000 milliseconds)
   });
 
   // Add a sleep period (in this case, 1 second) between requests
