@@ -26,5 +26,5 @@ jobs:
       env:
         KUBECONFIG: ${{ github.workspace }}/config
     - run: |
-        testkube create test --name k6-amazon-test --type k6/script --test-content-type git-file --git-uri https://github.com/techmaharaj/testkube-GH.git --git-branch main --git-path k6/testkube.js
-        testkube run test k6-amazon-test -f
+        testkube create test --name k6-kubeshop-test --type k6/script --test-content-type git-file --git-uri https://github.com/techmaharaj/testkube-GH.git --git-branch main --git-path k6/testkube.js
+        testkube run test k6-kubeshop-test -f
