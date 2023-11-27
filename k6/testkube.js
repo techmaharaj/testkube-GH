@@ -10,9 +10,9 @@ export default function () {
   // Send an HTTP GET request to the website
   let response = http.get('https://testkube.io'); // Replace with your website URL
 
-  // Check if the response time is less than 1000 milliseconds
+  // Check if the response time is less than 10 milliseconds
  check(response, {
-    'Response time is less than 1000 milliseconds': (r) => r.timings.duration < 10, // Check if response time is less than 1000 milliseconds
+    'Response time is less than 10 milliseconds': (r) => r.timings.duration < 10, // Check if response time is less than 10 milliseconds
   });
 
   // Add a sleep period (in this case, 1 second) between requests
