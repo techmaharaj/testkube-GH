@@ -1,20 +1,18 @@
 import http from 'k6/http';
-import { check, sleep } from 'k6';
+import { check } from 'k6';
 
 export let options = {
-  vus: 1, // Virtual Users
-  duration: '5s', // Duration of the test
+  stages: [
+    { duration: '10s', target: 1 }, // 1 virtual user for 10 seconds
+  ],
 };
 
 export default function () {
   // Send an HTTP GET request to the website
-  let response = http.get('https://testkube.io'); // Replace with your website URL
-  
-  // Check if the response time is greater than 1 second
-  check(response, {
-    'Response time is less than 1 second': (r) => r.timings.duration < 100,
-  });
+  let response = http.get('https://testkube.io');
 
-  // Add a sleep period (in this case, 1 second) between requests
-  sleep(1);
+  // Check the response duration
+  check(response, {
+    'Response time is less than 1 second': (r) => r.timings.duration < 1000, // Adjust threshold as needed
+  });
 }
