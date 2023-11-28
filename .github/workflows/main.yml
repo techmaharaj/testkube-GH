@@ -1,16 +1,10 @@
 name: Running tests with Testkube
 on:
-  pull_request:
-env:
-  CLUSTER_NAME: scrumptious-hideout-1700805231
-  AWS_REGION: us-west-2
- 
+  pull_request: 
 jobs:
    job_1:
     name: Testkube K6 Workflow For EKS Cluster
     runs-on: ubuntu-latest
-    outputs:
-      outpu1: ${{ steps.get_output.outputs.status }}
     steps:
     - name: Configure AWS cluster
       uses: kubeshop/setup-testkube@v1
