@@ -7,24 +7,17 @@ env:
  
 jobs:
    job_1:
-    name: test workflow for AWS
+    name: Testkube K6 Workflow For EKS Cluster
     runs-on: ubuntu-latest
     outputs:
       outpu1: ${{ steps.get_output.outputs.status }}
     steps:
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.AWS_REGION }}
-    - name: kubeconfig
-      run: |
-        aws eks update-kubeconfig --name ${{ env.CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
-    - name: Create & Run Test
+    - name: Configure AWS cluster
       uses: kubeshop/setup-testkube@v1
-      env:
-        KUBECONFIG: ${{ github.workspace }}/config
+      with:
+        organization: ${{ secrets.TESTKUBE_ORG_ID }}
+        environment: ${{ secrets.TESTKUBE_ENV_ID }}
+        token: ${{ secrets.TESTKUBE_API_TOKEN }}
     - run: |
         testkube create test --name k6-kubeshop-test --type k6/script --test-content-type git-file --git-uri https://github.com/techmaharaj/testkube-GH.git --git-branch main --git-path k6/testkube.js
         testkube run test k6-kubeshop-test -f
