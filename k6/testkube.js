@@ -8,7 +8,7 @@ export let options = {
 
 export default function () {
   // Send an HTTP GET request to the website
-  let response = http.get('https://testkube.io'); // Replace with your website URL
+  let response = http.get('https://testkube.io'); // Replace with your URL
 
   // Check if the response time is less than 1000 milliseconds
  check(response, {
