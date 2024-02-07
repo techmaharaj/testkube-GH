@@ -1,0 +1,20 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Test
+  jobs:
+  - job: RunTestkube
+    steps:
+      - task: SetupTestkube@1
+        inputs:
+          organization: '$(TK_ORG_ID)'
+          environment: '$(TK_ENV_ID)'
+          token: '$(TK_API_TOKEN)'
+      - script: |
+          testkube create test --name k6-kubeshop-test --type k6/script --update --test-content-type git-file --git-uri https://github.com/techmaharaj/testkube-GH.git --git-branch main --git-path k6/testkube.js
+          testkube run test k6-kubeshop-test -f
+        displayName: Run Testkube Test
