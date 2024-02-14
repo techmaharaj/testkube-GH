@@ -15,6 +15,8 @@ stages:
           environment: '$(TK_ENV_ID)'
           token: '$(TK_API_TOKEN)'
       - script: |
-          testkube create test --name k6-kubeshop-test --type k6/script --update --test-content-type git-file --git-uri https://github.com/techmaharaj/testkube-GH.git --git-branch main --git-path k6/testkube.js
-          testkube run test k6-kubeshop-test -f
+          git clone https://github.com/techmaharaj/testkube-GH.git
+          cd testkube-GH/k6
+          testkube create test --name k6-test --type k6/script --update -f testkube.js
+          testkube run test k6-test
         displayName: Run Testkube Test
