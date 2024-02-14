@@ -17,6 +17,6 @@ stages:
       - script: |
           git clone https://github.com/techmaharaj/testkube-GH.git
           cd testkube-GH/k6
-          testkube create test --name k6-test --type k6/script --update -f testkube.js
-          testkube run test k6-test
+          testkube create test --name k6-kubeshop-test --type k6/script --update -f testkube.js
+          testkube run test k6-kubeshop-test -f
         displayName: Run Testkube Test
